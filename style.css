@@ -29,9 +29,54 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width : 90%;
-    margin: 0 5%;
+    width : 100%;
+    padding : 0 5%;
+    top : 0;
 }
+
+.sticky {
+    position : fixed;
+    z-index : 1000;
+    background-color : aqua;
+}
+.sticky-user-info-container {
+    display : none;
+}
+
+.sticky .user-info-container {
+    display : none;
+}
+
+.sticky .sticky-user-info-container {
+    display : block;
+    font-size : 300%;
+}
+
+.sticky-bar-input-container {
+    display : none;
+}
+
+.sticky .sticky-bar-input-container{
+    display : block;
+}
+
+.sticky-bar-item-input-box {
+    padding : 8px;
+    margin-right : 2px;
+}
+
+
+.sticky-bar-search-button {
+    padding : 8px;
+    background-color : #e67e22;
+    color : #fff;
+    border-color : #e67e22;
+}
+
+.sticky-bar-item-input-box:active .sticky-bar-search-button {
+    display : block;
+}
+
 
 .main-logo {
     height : 50px;
@@ -80,7 +125,7 @@ nav {
 }
 
 .search-button {
-    width : 15%;
+    width : 20%;
     padding : 7px;
     margin-left: 15px;
     background-color: #e67e22;
@@ -122,6 +167,7 @@ nav {
     margin-right: 8px;
 }
 
+
 .item h4 {
     font-size : 0.5rem;
 }
@@ -132,17 +178,19 @@ nav {
 }
 
 .item-image-container img {
-    width: 100%;
-    height: 100%;
+    width : 100%;
+    height : 100%;
 }
 
 .item-info-container {
-    height: 18%;
     width : 100%;
+    height : 18%;
+    padding : 0 2.42%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     vertical-align: bottom;
+    transform : translateY(5px);
 }
 
 .item-info-container h4 {
@@ -184,6 +232,7 @@ nav {
 /*Media Queries*/
 /*----------*/
 
+
 @media only screen and (min-width : 760px) {
     .main-logo {
         height : 70px;
@@ -218,5 +267,46 @@ nav {
     
     .item-info-container h4 {
         font-size: 150%;
+    }
+
+}
+
+@media only screen and (min-width : 1200px) {
+    .item {
+        position : relative;
+    }
+
+    .item-image-container {
+        height : 100%;
+    }
+
+    .item-image-container img {
+        object-fit : cover;
+        transform : scale(1.05);
+    }
+
+
+    .item-info-container {
+        position : absolute;
+        opacity : 0;
+        top : 44%;
+    }
+
+    .item-info-container button {
+        background-color : #000;
+        color : #e67e22;
+        border-color: #000;
+    }
+
+    .item:hover .item-image-container {
+        opacity : 0.3;
+    }
+
+    .item:hover .item-image-container img {
+        transform : scale(1);
+    }
+    
+    .item:hover .item-info-container {
+        opacity: 1;
     }
 }
