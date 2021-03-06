@@ -310,3 +310,9 @@ nav {
         opacity: 1;
     }
 }
+
+@media only screen and (min-width : 746px) {
+    .sticky {
+        display : none;
+    }
+}

@@ -1,6 +1,7 @@
 const cartBtn = document.querySelectorAll(".add-cart");
 const cartNum = document.querySelector(".cart-number");
 const navBar = document.querySelector("nav");
+const btn = document.querySelector("button");
 
 
 let collections = {
@@ -20,4 +21,8 @@ for (let i = 0 ; i<cartBtn.length ; i++) {
 
 document.addEventListener("scroll" , () => {
     navBar.classList.toggle("sticky" , window.scrollY > 100);
+})
+
+btn.addEventListener("click" , (event) => {
+    event.preventDefault();
 })
