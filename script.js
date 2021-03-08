@@ -124,8 +124,8 @@ for(let i=0 ; i<buyBtn.length ; i++)
 
 // When we click Cancel button inside the buy info div
 buyBtnCancel.addEventListener("click" , () => {
-    let items = buyInfoUnlist.childNode;
-    items.remove();
+    // let items = buyInfoUnlist.childNode;
+    // items.remove();
     section.style.display = "block";
     buyInfoDiv.style.display = "none";
 });
