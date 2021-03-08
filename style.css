@@ -18,6 +18,61 @@ section {
     width: 100%;
 }
 
+/* ----------- */
+/* Buy Info Div */
+/* ------------ */
+
+.buy-info-div {
+    height : 40vh;
+    width  : 70vw;
+    display : none;
+    z-index : 50000;
+    position :absolute;
+    background-color: red;
+    padding : 50px;
+    top : 30%;
+    left : 15%;
+}
+
+.buy-info-div h2 {
+    margin-bottom : 10px;
+}
+
+.buyInfo-button-container {
+    position: absolute;
+    bottom : 0;
+    margin-bottom : 0.6rem;
+    left : 15%;
+}
+
+.buyInfo-button-container button {
+    margin-right: 2.5rem;
+    padding : 8px 10px;
+    background-color : #e67e22;
+    color : #fff;
+    border-color : #e67e22;
+    border-radius : 6px;
+    outline : none;
+}
+
+.buyInfo-button-container button:hover {
+    background-color : #fff;
+    color : #e67e22;
+}
+
+.buyInfo-button-container button:active {
+    transform : translateY(2px);
+}
+
+.buyInfo-unlist {
+    margin-bottom : 2rem;
+}
+
+
+
+/* Buy Info Div */
+/* ------------ */
+
 /*Nav Container*/
 /*--------------*/
 
@@ -63,6 +118,7 @@ nav {
 .sticky-bar-item-input-box {
     padding : 8px;
     margin-right : 2px;
+    width : 110px;
 }
 
 

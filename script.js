@@ -2,10 +2,97 @@ const cartBtn = document.querySelectorAll(".add-cart");
 const cartNum = document.querySelector(".cart-number");
 const navBar = document.querySelector("nav");
 const btn = document.querySelector("button");
+const buyBtn = document.querySelectorAll(".buy-button");
+const section = document.querySelector("section");
+const buyInfoDiv = document.querySelector(".buy-info-div");
+const buyInfoUnlist = document.querySelector(".buyInfo-unlist");
+const buyInfoPrice = document.querySelector(".buyInfo-price");
+const buyBtnCancel = document.querySelector(".buy-button-cancel");
+const buyBtnOk = document.querySelector(".buy-button-ok");
 
+
+
+//Item container
 
 let collections = {
-    cartCount : 0
+    // items : {
+    //     img : ["img/items-collection/item-1.jpg",
+    //     "img/items-collection/item-2.jpg",
+    //     "img/items-collection/item-3.jpg",
+    //     "img/items-collection/item-4.jpg",
+    //     "img/items-collection/item-5.jpg",
+    //     "img/items-collection/item-6.jpg",
+    //     "img/items-collection/item-7.png",
+    //     "img/items-collection/item-8.jpg",
+    //     "img/items-collection/item-9.jpg",
+    //     "img/items-collection/item-10.jpg",
+    //             ],
+    //     h4:["Rs.4000" , "Rs.1100" , "Rs.2100" , "Rs.3050" , "Rs.980" , "Rs.990" , "Rs.15000" , "Rs.4400" , "Rs.2260" , "Rs.44000"],
+    // },
+    cartCount : 0,
+    itemInfo : {
+        1 : "Black Fashion Shoes",
+        2 : "Black MI Airpods",
+        3 : "Blue MPOW Headphones",
+        4 : "Men's HMTE Watch",
+        5 : "Black Fashion T-Shirt",
+        6 : "Stylish Computer Glasses",
+        7 : "Acoustic Guitar",
+        8 : "Black Thor Helmet",
+        9 : "Black and Red Women's Bag",
+        10 : "Oppo Note 10",
+    },
+
+}
+
+// {/* <div class="item">
+//                     <div class="item-image-container">
+//                         <img src="img/items-collection/item-1.jpg">
+//                     </div>
+//                     <div class="item-info-container">
+//                         <h4>Rs.4000</h4>
+//                         <button>Buy</button>
+//                         <h4 class="add-cart">Add to Cart</h4>
+//                     </div>
+//                 </div> */}
+
+// // Add Attribute function
+// const addAttribute = (el , attr) => {
+//     for(const i in attr) {
+//         el.setAttribute(i , attr[i]);
+//     }
+// }
+
+// // Adding the cart items dynamically
+// const makeItem = (items) => {
+//     items[img].map((el) => {
+
+//     });
+    
+    
+
+// }
+
+// Create Item List
+const createItemList = (event) => {
+    let clickedItemId = event.target.parentNode.parentNode.id;
+    for(let i in collections.itemInfo) {
+        if(i===clickedItemId) {
+            let list = document.createElement("li");
+            list.innerHTML = collections.itemInfo[i];
+            buyInfoUnlist.append(list);
+        }
+    }
+    let clickedItemPrice = event.target.previousElementSibling.textContent;
+    clickedItemPrice = clickedItemPrice.slice(3,clickedItemPrice.length);
+    buyInfoPrice.textContent = clickedItemPrice;
+}
+
+// Function to show a div when we click the buy button
+const showBuyDiv = (e) => {
+    createItemList(e);
+    section.style.display = "none";
+    buyInfoDiv.style.display = "block";
 }
 
 const cartAdd = () => {
@@ -26,3 +113,26 @@ document.addEventListener("scroll" , () => {
 btn.addEventListener("click" , (event) => {
     event.preventDefault();
 })
+
+// When we click Buy Button
+for(let i=0 ; i<buyBtn.length ; i++)
+    {
+        buyBtn[i].addEventListener("click" , (e) => {
+            showBuyDiv(e);
+        });
+    }
+
+// When we click Cancel button inside the buy info div
+buyBtnCancel.addEventListener("click" , () => {
+    let items = buyInfoUnlist.childNode;
+    items.remove();
+    section.style.display = "block";
+    buyInfoDiv.style.display = "none";
+});
+
+// When we click Buy It button inside the buy info div
+buyBtnOk.addEventListener("click" , () => {
+    section.style.display = "block";
+    buyInfoDiv.style.display = "none";
+    alert("Thanks for buying the product");
+});
