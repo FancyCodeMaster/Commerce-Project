@@ -84,7 +84,7 @@ const createItemList = (event) => {
             }
             list = document.createElement("li");
             list.innerHTML = collections.itemInfo[i];
-            buyInfoUnlist.append(list);
+            buyInfoUnlist.appendChild(list);
         }
     }
     let clickedItemPrice = event.target.previousElementSibling.textContent;
@@ -142,10 +142,11 @@ buyBtnCancel.addEventListener("click" , () => {
 });
 
 // When we click Buy It button inside the buy info div
-buyBtnOk.addEventListener("click" , () => {
+buyBtnOk.addEventListener("click" , (e) => {
     section.style.display = "block";
     buyInfoDiv.style.display = "none";
-    alert("Thanks for buying the product");
+    alert(`Thanks for buying the ${e.target.parentNode.previousElementSibling.previousElementSibling.childNodes[0].textContent}`);
+    console.log(e.target.parentNode.previousElementSibling.previousElementSibling.childNodes[0].innerHTML);
 });
 
 // When we click the hamburger 
