@@ -1,14 +1,15 @@
-const cartBtn = document.querySelectorAll(".add-cart");
-const cartNum = document.querySelector(".cart-number");
-const navBar = document.querySelector("nav");
-const btn = document.querySelector("button");
-const buyBtn = document.querySelectorAll(".buy-button");
-const section = document.querySelector("section");
-const buyInfoDiv = document.querySelector(".buy-info-div");
-const buyInfoUnlist = document.querySelector(".buyInfo-unlist");
-const buyInfoPrice = document.querySelector(".buyInfo-price");
-const buyBtnCancel = document.querySelector(".buy-button-cancel");
-const buyBtnOk = document.querySelector(".buy-button-ok");
+let cartBtn = document.querySelectorAll(".add-cart");
+let cartNum = document.querySelector(".cart-number");
+let navBar = document.querySelector("nav");
+let btn = document.querySelector("button");
+let buyBtn = document.querySelectorAll(".buy-button");
+let section = document.querySelector("section");
+let buyInfoDiv = document.querySelector(".buy-info-div");
+let buyInfoUnlist = document.querySelector(".buyInfo-unlist");
+let buyInfoPrice = document.querySelector(".buyInfo-price");
+let buyBtnCancel = document.querySelector(".buy-button-cancel");
+let buyBtnOk = document.querySelector(".buy-button-ok");
+let hamburger = document.querySelector(".sticky-user-info-container");
 
 
 
@@ -72,13 +73,13 @@ let collections = {
     
 
 // }
-
+let list=null;
 // Create Item List
 const createItemList = (event) => {
     let clickedItemId = event.target.parentNode.parentNode.id;
     for(let i in collections.itemInfo) {
         if(i===clickedItemId) {
-            let list = document.createElement("li");
+            list = document.createElement("li");
             list.innerHTML = collections.itemInfo[i];
             buyInfoUnlist.append(list);
         }
@@ -101,9 +102,15 @@ const cartAdd = () => {
     cartNum.textContent = collections.cartCount;
 }
 
-for (let i = 0 ; i<cartBtn.length ; i++) {
-    cartBtn[i].addEventListener("click" , cartAdd);
+const showStickyUserInfo = () => {
+
 }
+
+// converting nodelist into array. cartBtn was nodeList as we used querySelectorAll 
+cartBtn = Array.from(cartBtn);
+cartBtn.map(el => {
+    el.addEventListener("click" , cartAdd);
+});
 
 
 document.addEventListener("scroll" , () => {
@@ -115,12 +122,13 @@ btn.addEventListener("click" , (event) => {
 })
 
 // When we click Buy Button
-for(let i=0 ; i<buyBtn.length ; i++)
-    {
-        buyBtn[i].addEventListener("click" , (e) => {
-            showBuyDiv(e);
-        });
-    }
+buyBtn = Array.from(buyBtn);
+buyBtn.map(el => {
+    el.addEventListener("click" , (e) => {
+        showBuyDiv(e);
+    });
+});
+
 
 // When we click Cancel button inside the buy info div
 buyBtnCancel.addEventListener("click" , () => {
@@ -136,3 +144,6 @@ buyBtnOk.addEventListener("click" , () => {
     buyInfoDiv.style.display = "none";
     alert("Thanks for buying the product");
 });
+
+// When we click the hamburger 
+hamburger.addEventListener("click" , showStickyUserInfo);
