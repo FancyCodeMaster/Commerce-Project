@@ -79,6 +79,9 @@ const createItemList = (event) => {
     let clickedItemId = event.target.parentNode.parentNode.id;
     for(let i in collections.itemInfo) {
         if(i===clickedItemId) {
+            if(list!==null && buyInfoUnlist.children) {
+                buyInfoUnlist.removeChild(list);
+            }
             list = document.createElement("li");
             list.innerHTML = collections.itemInfo[i];
             buyInfoUnlist.append(list);
@@ -102,9 +105,9 @@ const cartAdd = () => {
     cartNum.textContent = collections.cartCount;
 }
 
-const showStickyUserInfo = () => {
+// const showStickyUserInfo = () => {
 
-}
+// }
 
 // converting nodelist into array. cartBtn was nodeList as we used querySelectorAll 
 cartBtn = Array.from(cartBtn);
@@ -146,4 +149,4 @@ buyBtnOk.addEventListener("click" , () => {
 });
 
 // When we click the hamburger 
-hamburger.addEventListener("click" , showStickyUserInfo);
+// hamburger.addEventListener("click" , showStickyUserInfo);
