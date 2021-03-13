@@ -11,6 +11,8 @@ let buyBtnCancel = document.querySelector(".buy-button-cancel");
 let buyBtnOk = document.querySelector(".buy-button-ok");
 let hamburger = document.querySelector(".sticky-user-info-container");
 
+let cartItemInfoContainer = document.querySelector(".cart-item-info");
+
 
 
 //Item container
@@ -101,7 +103,6 @@ const showBuyDiv = (e) => {
 
 const cartAdd = () => {
     collections.cartCount++;
-    console.log(collections.cartCount);
     cartNum.textContent = collections.cartCount;
 }
 
@@ -150,4 +151,7 @@ buyBtnOk.addEventListener("click" , (e) => {
 });
 
 // When we click the hamburger 
-// hamburger.addEventListener("click" , showStickyUserInfo);
+hamburger.addEventListener("click" , () => {
+    
+    cartItemInfoContainer.style.display = "initial";
+});
