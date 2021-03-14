@@ -1,5 +1,6 @@
 let cartBtn = document.querySelectorAll(".add-cart");
 let cartNum = document.querySelector(".cart-number");
+let cartClick = document.querySelector(".cart-icon-container");
 let navBar = document.querySelector("nav");
 let btn = document.querySelector("button");
 let buyBtn = document.querySelectorAll(".buy-button");
@@ -12,6 +13,11 @@ let buyBtnOk = document.querySelector(".buy-button-ok");
 let hamburger = document.querySelector(".sticky-user-info-container");
 
 let cartItemInfoContainer = document.querySelector(".cart-item-info");
+let cartItemImageContainer = document.querySelector(".cart-item-image-container");
+let cartItemInfoHeading = document.querySelector(".cart-item-info-heading");
+let minusQuantityIcon = document.querySelector(".minus-item-quantity");
+let addQuantityIcon = document.querySelector(".add-item-quantity");
+let itemQuantityNumber = document.querySelector(".item-quantity-number");
 
 
 
@@ -86,6 +92,7 @@ const createItemList = (event) => {
             }
             list = document.createElement("li");
             list.innerHTML = collections.itemInfo[i];
+            list.setAttribute("id" , i);
             buyInfoUnlist.appendChild(list);
         }
     }
@@ -146,12 +153,17 @@ buyBtnCancel.addEventListener("click" , () => {
 buyBtnOk.addEventListener("click" , (e) => {
     section.style.display = "block";
     buyInfoDiv.style.display = "none";
-    alert(`Thanks for buying the ${e.target.parentNode.previousElementSibling.previousElementSibling.childNodes[0].textContent}`);
-    console.log(e.target.parentNode.previousElementSibling.previousElementSibling.childNodes[0].innerHTML);
+    alert(`Thanks for buying the ${collections.itemInfo[e.target.parentNode.previousElementSibling.previousElementSibling.childNodes[0].id]}`);
 });
 
+// When we click the cart icon
+cartClick.addEventListener("click" , () => {
+    cartItemInfoContainer.classList.toggle("active");
+})
+
 // When we click the hamburger 
-hamburger.addEventListener("click" , () => {
+// hamburger.addEventListener("click" , () => {
     
-    cartItemInfoContainer.style.display = "initial";
-});
+//     cartItemInfoContainer.style.display = "initial";
+// });
+

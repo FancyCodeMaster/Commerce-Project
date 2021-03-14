@@ -91,7 +91,7 @@ nav {
 
 .sticky {
     position : fixed;
-    z-index : 1000;
+    z-index : 100000;
     background-color : aqua;
 }
 .sticky-user-info-container {
@@ -164,9 +164,73 @@ nav {
 
 /*Cart-Item-Info-Container*/
 /*---------------------*/
-.cart-item-info {
+.cart-item-info { 
+    background-color : #000;
+    position : absolute;
+    z-index : 10000;
+    top : 8%;
+    width : 100%;
     display : none;
 }
+
+.active {
+    display : initial;
+}
+
+.caret {
+    position : absolute;
+    z-index : 40000;
+    top : 80%;
+    left : 45%;
+    font-size : 300%;
+    border : 1px solid #fff;
+    background-color: #fff;
+    border-radius : 5px;
+    cursor : pointer;
+}
+
+.item-info {
+    background-color : red;
+    display : flex;
+    justify-content : space-around;
+    align-items: center;
+    margin-bottom : 10px;
+}
+
+.cart-item-image-container {
+    height : 80px;
+    width : 80px;
+    border-right : 2px solid #000;
+    padding : 5px;
+}
+
+.cart-item-image-container img {
+    height : 100%;
+    width : 100%;
+    object-fit : contain;
+}
+
+.cart-item-info-heading {
+    border-right : 2px solid #000;
+    padding : 5px;
+}
+
+/* .cart-item-buy-option-container {
+
+} */
+
+.minus-item-quantity {
+    cursor : pointer;
+}
+
+.item-quantity-number  {
+    cursor : pointer;
+}
+/* 
+.add-item-quantity {
+
+} */
+
 
 
 /*------------*/
