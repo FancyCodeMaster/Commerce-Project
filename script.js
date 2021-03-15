@@ -18,7 +18,8 @@ let cartItemInfoHeading = document.querySelector(".cart-item-info-heading");
 let minusQuantityIcon = document.querySelector(".minus-item-quantity");
 let addQuantityIcon = document.querySelector(".add-item-quantity");
 let itemQuantityNumber = document.querySelector(".item-quantity-number");
-
+let caret = document.querySelector(".caret");
+let sidebar = document.querySelector(".sidebar");
 
 
 //Item container
@@ -161,9 +162,14 @@ cartClick.addEventListener("click" , () => {
     cartItemInfoContainer.classList.toggle("active");
 })
 
-// When we click the hamburger 
-// hamburger.addEventListener("click" , () => {
-    
-//     cartItemInfoContainer.style.display = "initial";
-// });
+// When we click the caret icon
+caret.addEventListener("click" , () => {
+    cartItemInfoContainer.classList.remove("active");
+})
+
+//When we click the hamburger 
+hamburger.addEventListener("click" , () => {
+    cartItemInfoContainer.style.display = "none";
+    sidebar.classList.toggle("sidebarActive");
+});
 
