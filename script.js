@@ -13,30 +13,27 @@ let buyBtnOk = document.querySelector(".buy-button-ok");
 let hamburger = document.querySelector(".sticky-user-info-container");
 
 let cartItemInfoContainer = document.querySelector(".cart-item-info");
-let cartItemImageContainer = document.querySelector(".cart-item-image-container");
-let cartItemInfoHeading = document.querySelector(".cart-item-info-heading");
-let minusQuantityIcon = document.querySelector(".minus-item-quantity");
-let addQuantityIcon = document.querySelector(".add-item-quantity");
-let itemQuantityNumber = document.querySelector(".item-quantity-number");
 let caret = document.querySelector(".caret");
 let sidebar = document.querySelector(".sidebar");
+let toScroll = document.querySelector(".toScroll");
+
 
 
 //Item container
 
 let collections = {
-    // items : {
-    //     img : ["img/items-collection/item-1.jpg",
-    //     "img/items-collection/item-2.jpg",
-    //     "img/items-collection/item-3.jpg",
-    //     "img/items-collection/item-4.jpg",
-    //     "img/items-collection/item-5.jpg",
-    //     "img/items-collection/item-6.jpg",
-    //     "img/items-collection/item-7.png",
-    //     "img/items-collection/item-8.jpg",
-    //     "img/items-collection/item-9.jpg",
-    //     "img/items-collection/item-10.jpg",
-    //             ],
+    itemImg : {
+        1 : "img/items-collection/item-1.jpg",
+        2 : "img/items-collection/item-2.jpg",
+        3 : "img/items-collection/item-3.jpg",
+        4 : "img/items-collection/item-4.jpg",
+        5 : "img/items-collection/item-5.jpg",
+        6 : "img/items-collection/item-6.jpg",
+        7 : "img/items-collection/item-7.png",
+        8 : "img/items-collection/item-8.jpg",
+        9 : "img/items-collection/item-9.jpg",
+        10 : "img/items-collection/item-10.jpg",
+                },
     //     h4:["Rs.4000" , "Rs.1100" , "Rs.2100" , "Rs.3050" , "Rs.980" , "Rs.990" , "Rs.15000" , "Rs.4400" , "Rs.2260" , "Rs.44000"],
     // },
     cartCount : 0,
@@ -52,36 +49,23 @@ let collections = {
         9 : "Black and Red Women's Bag",
         10 : "Oppo Note 10",
     },
+    cartIndCount : {
+        1 : 0,
+        2 : 0,
+        3 : 0,
+        4 : 0,
+        5 : 0,
+        6 : 0,
+        7 : 0,
+        8 : 0,
+        9 : 0,
+        10 : 0,     
+    },
+    prevCartItem : null
 
 }
 
-// {/* <div class="item">
-//                     <div class="item-image-container">
-//                         <img src="img/items-collection/item-1.jpg">
-//                     </div>
-//                     <div class="item-info-container">
-//                         <h4>Rs.4000</h4>
-//                         <button>Buy</button>
-//                         <h4 class="add-cart">Add to Cart</h4>
-//                     </div>
-//                 </div> */}
 
-// // Add Attribute function
-// const addAttribute = (el , attr) => {
-//     for(const i in attr) {
-//         el.setAttribute(i , attr[i]);
-//     }
-// }
-
-// // Adding the cart items dynamically
-// const makeItem = (items) => {
-//     items[img].map((el) => {
-
-//     });
-    
-    
-
-// }
 let list=null;
 // Create Item List
 const createItemList = (event) => {
@@ -102,6 +86,20 @@ const createItemList = (event) => {
     buyInfoPrice.textContent = clickedItemPrice;
 }
 
+// Function to set Attribute
+const setAttr = (el , prop) => {
+    for(let i in prop) {
+        el.setAttribute(i , prop[i]);
+    }
+}
+
+// Disabling the cart icon when the cart amount is zero
+if(collections.cartCount===0) {
+    cartBtn.disabled = true;
+}else {
+    cartBtn.disabled = false;
+}
+
 // Function to show a div when we click the buy button
 const showBuyDiv = (e) => {
     createItemList(e);
@@ -109,9 +107,100 @@ const showBuyDiv = (e) => {
     buyInfoDiv.style.display = "block";
 }
 
-const cartAdd = () => {
+// Function to make dropdown when we click the cart icon
+const createDropDown = (e) => {
+
+    let dropDownItemInfo = document.createElement("div");
+    let dropDownItemOption = document.createElement("div");
+    let cartItemImageContainer = document.createElement("div");
+    let cartItemInfoHeading = document.createElement("div");
+
+    setAttr(dropDownItemInfo , {
+        "class" : "item-info"
+    });
+    setAttr(dropDownItemOption , {
+        "class" : "cart-item-buy-option-container"
+    });
+    setAttr(cartItemImageContainer , {
+        "class" : "cart-item-image-container"
+    });
+    setAttr(cartItemInfoHeading , {
+        "class" : "cart-item-info-heading"
+    });
+
+    let itemId = e.target.parentNode.parentNode.id;
+
+    let imgSrc = collections.itemImg[itemId];
+    let dropDownImg = document.createElement("img");
+    setAttr(dropDownImg , {
+        "src" : imgSrc,
+        "alt" : "itemimage"
+    });
+    let itemHeading = document.createElement("h3");
+    itemHeading.textContent = collections.itemInfo[itemId];
+    cartItemImageContainer.appendChild(dropDownImg);
+    console.log(cartItemImageContainer);
+    cartItemInfoHeading.appendChild(itemHeading);
+    console.log(cartItemInfoHeading);
+
+    let cartOptionHeading = document.createElement("h3");
+    let minusQuantityIcon = document.createElement("ion-icon");
+    let addQuantityIcon = document.createElement("ion-icon");
+    let itemQuantityNumber = document.createElement("span");
+    let strongText = document.createElement("strong");
+
+    strongText.textContent = "Qty : ";
+
+    itemQuantityNumber.textContent = collections.cartIndCount[itemId];
+
+    setAttr(minusQuantityIcon , {
+        "name" : "remove-outline",
+        "class" : "minus-item-quantity"
+    });
+    setAttr(addQuantityIcon , {
+        "name" : "add-outline",
+        "class" : "add-item-quantity"
+    });
+    cartOptionHeading.appendChild(minusQuantityIcon);
+    cartOptionHeading.appendChild(strongText);
+    cartOptionHeading.appendChild(itemQuantityNumber);
+    cartOptionHeading.appendChild(addQuantityIcon);
+    
+    dropDownItemOption.appendChild(cartOptionHeading);
+
+    dropDownItemInfo.appendChild(cartItemImageContainer);
+    dropDownItemInfo.appendChild(cartItemInfoHeading);
+    dropDownItemInfo.appendChild(dropDownItemOption);
+
+    toScroll.appendChild(dropDownItemInfo);
+};
+
+/*
+
+let dropDownItemInfo = document.querySelector(".item-info");
+let cartItemImageContainer = document.querySelector(".cart-item-image-container");
+let cartItemInfoHeading = document.querySelector(".cart-item-info-heading");
+let dropDownItemOption = document.querySelector(".cart-item-buy-option-container");
+                        <div class="item-info">
+                            <div class="cart-item-image-container">
+                                <img src="img/items-collection/item-1.jpg" alt="check">
+                            </div>
+                            <div class="cart-item-info-heading">
+                                <h3>Black Stylish Shoe</h3>
+                            </div>
+                            <div class="cart-item-buy-option-container">
+                                <h3>
+                                    <ion-icon name="remove-outline" class="minus-item-quantity"></ion-icon>
+                                    <strong>Qty :</strong> <span class="item-quantity-number">5</span>
+                                    <ion-icon name="add-outline" class="add-item-quantity"></ion-icon></h3>
+                            </div>
+                        </div>
+*/
+
+const cartAdd = (e) => {
     collections.cartCount++;
     cartNum.textContent = collections.cartCount;
+    createDropDown(e);
 }
 
 // const showStickyUserInfo = () => {
@@ -121,7 +210,10 @@ const cartAdd = () => {
 // converting nodelist into array. cartBtn was nodeList as we used querySelectorAll 
 cartBtn = Array.from(cartBtn);
 cartBtn.map(el => {
-    el.addEventListener("click" , cartAdd);
+    el.addEventListener("click" , (e) => {
+        collections.cartIndCount[e.target.parentNode.parentNode.id]++;
+        cartAdd(e);
+    });
 });
 
 
