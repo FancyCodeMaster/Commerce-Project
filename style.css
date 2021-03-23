@@ -19,6 +19,28 @@ section {
 }
 
 /* ----------- */
+/* Backdrop */
+/* ------------ */
+
+.backdrop {
+    height : 100%;
+    width : 100%;
+    position : fixed;
+    z-index : 5000;
+    background-color : rgba(0,0,0,0.5);
+    display : none;
+}
+
+/*Backdrop */
+/* ------------ */
+
+
+
+
+
+
+
+/* ----------- */
 /* Buy Info Div */
 /* ------------ */
 
@@ -27,7 +49,7 @@ section {
     width  : 70vw;
     display : none;
     z-index : 50000;
-    position :absolute;
+    position :fixed;
     background-color: red;
     padding : 50px;
     top : 30%;
@@ -257,10 +279,11 @@ nav {
     height : 100vh;
     width : 70%;
     position : fixed;
-    z-index : 50000;
+    z-index : 500000000;
     right : 0;
     top : 0;
     display : none;
+    transition : all 1s;
 }
 
 .sidebarActive {
@@ -398,6 +421,14 @@ nav {
 /*item-collection-container*/
 /*------------------------*/
 
+/* Little Animation in buy button div  */
+.open {
+    transform : translateY(0);
+}
+
+.close {
+    transform : translateY(-200%);
+}
 
 /*-----------*/
 /*Media Queries*/

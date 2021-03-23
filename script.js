@@ -17,6 +17,8 @@ let caret = document.querySelector(".caret");
 let sidebar = document.querySelector(".sidebar");
 let toScroll = document.querySelector(".toScroll");
 
+let backdrop = document.querySelector(".backdrop");
+
 
 
 //Item container
@@ -103,9 +105,16 @@ if(collections.cartCount===0) {
 // Function to show a div when we click the buy button
 const showBuyDiv = (e) => {
     createItemList(e);
-    section.style.display = "none";
     buyInfoDiv.style.display = "block";
+    backdrop.style.display = "block";
 }
+
+// When we click the backdrop
+backdrop.addEventListener("click" , () => {
+    buyInfoDiv.style.display = "none";
+    backdrop.style.display = "none";
+    sidebar.classList.remove("sidebarActive");
+})
 
 // Function to make dropdown when we click the cart icon
 const createDropDown = (e) => {
@@ -240,12 +249,14 @@ buyBtnCancel.addEventListener("click" , () => {
     // items.remove();
     section.style.display = "block";
     buyInfoDiv.style.display = "none";
+    backdrop.style.display = "none";
 });
 
 // When we click Buy It button inside the buy info div
 buyBtnOk.addEventListener("click" , (e) => {
     section.style.display = "block";
     buyInfoDiv.style.display = "none";
+    backdrop.style.display = "none";
     alert(`Thanks for buying the ${collections.itemInfo[e.target.parentNode.previousElementSibling.previousElementSibling.childNodes[0].id]}`);
 });
 
@@ -262,6 +273,7 @@ caret.addEventListener("click" , () => {
 //When we click the hamburger 
 hamburger.addEventListener("click" , () => {
     cartItemInfoContainer.style.display = "none";
-    sidebar.classList.toggle("sidebarActive");
+    sidebar.classList.add("sidebarActive");
+    backdrop.style.display = "block";
 });
 
